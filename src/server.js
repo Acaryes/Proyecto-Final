@@ -39,7 +39,7 @@ app.use(
                 useUnifiedTopology: true,
             }
         }),
-        secret: process.env.SECRET,
+        secret: 'secreto',
         resave: true,
         saveUninitialized: true,
         cookie: {maxAge: 600000} //10 min.

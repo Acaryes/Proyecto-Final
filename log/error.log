@@ -828,3 +828,36 @@
       at model.Query.Query.cast (/home/adan/Desktop/Backend/Entrega-21/node_modules/mongoose/lib/query.js:5137:12),
   valueType: 'Object'
 }
+[2023-04-04T00:07:35.920] [ERROR] default - ⛔ Error al conectarse a MongoDB
+[2023-04-04T00:45:37.618] [ERROR] default - Error: listen EADDRINUSE: address already in use :::13213
+    at Server.setupListenHandle [as _listen2] (net.js:1331:16)
+    at listenInCluster (net.js:1379:12)
+    at Server.listen (net.js:1465:7)
+    at file:///C:/Users/Adan/Desktop/Proyecto%20Final/src/server.js:117:10
+    at ModuleJob.run (internal/modules/esm/module_job.js:183:25)
+    at async Loader.import (internal/modules/esm/loader.js:178:24)
+    at async Object.loadESM (internal/process/esm_loader.js:68:5) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 13213
+}
+[2023-04-04T00:51:04.317] [ERROR] default - MongoServerError: E11000 duplicate key error collection: test.usuarios index: username_1 dup key: { username: "test" }
+    at C:\Users\Adan\Desktop\Proyecto Final\node_modules\mongoose\node_modules\mongodb\lib\operations\insert.js:53:33
+    at C:\Users\Adan\Desktop\Proyecto Final\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection_pool.js:273:25
+    at handleOperationResult (C:\Users\Adan\Desktop\Proyecto Final\node_modules\mongoose\node_modules\mongodb\lib\sdam\server.js:327:20)
+    at Connection.onMessage (C:\Users\Adan\Desktop\Proyecto Final\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection.js:215:9)
+    at MessageStream.<anonymous> (C:\Users\Adan\Desktop\Proyecto Final\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection.js:63:60)
+    at MessageStream.emit (events.js:400:28)
+    at processIncomingData (C:\Users\Adan\Desktop\Proyecto Final\node_modules\mongoose\node_modules\mongodb\lib\cmap\message_stream.js:108:16)
+    at MessageStream._write (C:\Users\Adan\Desktop\Proyecto Final\node_modules\mongoose\node_modules\mongodb\lib\cmap\message_stream.js:28:9)
+    at writeOrBuffer (internal/streams/writable.js:358:12)
+    at MessageStream.Writable.write (internal/streams/writable.js:303:10) {
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'test' },
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2023-04-04T13:16:43.682] [ERROR] default - ⛔ Error al conectarse a MongoDB

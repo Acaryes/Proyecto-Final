@@ -13,9 +13,16 @@ import minimist from 'minimist';
 import logger from "./utils/loggers/Log4jsLogger.js";
 import loggerMiddleware from "./middlewares/routesLogger.middleware.js";
 const app = express();
+import { Server } from 'socket.io';
+import http from 'http';
+const server = http.createServer(app);
+const io = new Server(server);
+
+import Contenedor from './contenedor.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const chat = new Contenedor("chat.json")
 
 app.use(loggerMiddleware);
 app.use(express.static('public'));
@@ -70,17 +77,44 @@ const options = {
     }
 };
 
+io.on('connection', async(socket) => {
+//make a chat with socket.io  and save the messages in a file  (chat.json)    
+
+
+
+
+   console.log('🟢 Usuario conectado')
+   
+   
+
+   const mensajes = await chat.getAll();
+   socket.emit('listaMensajesBienvenida', mensajes)
+   
+   socket.on('nuevoMensaje', async(data) => {
+       await chat.save(data);
+       
+       
+       const mensajes = await chat.getAll();
+       io.sockets.emit('listaMensajesActualizada', mensajes)
+   })
+
+   
+   socket.on('disconnect', () => {
+       console.log('🔴 Usuario desconectado')
+   })
+   
+})
+
 app._router.stack.forEach(function (r) {
     if (r.route && r.route.path) {
       console.log(r.route.path)
     }
   });
 
-const { PORT } = minimist(process.argv.slice(2), options);
-
-const server = app.listen(PORT, () => {
-    logger.info(`🚀 Server started at http://localhost:${PORT}`)
-    })
+  const PORT = 13213;
+  server.listen(PORT, () => {
+      console.log(` >>>>> 🚀 Server started at http://localhost:${PORT}`)
+  })
     
 server.on('error', (err) => logger.error(err));
 
